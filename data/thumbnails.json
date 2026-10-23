@@ -1,0 +1,16 @@
+{
+    "_README": "Custom vehicle thumbnails. Each key is a model name (the spawn name of the vehicle, lowercase or mixed-case — matched case-insensitively). Each value is a URL to an image file. When a vehicle appears in the garage NUI, BGarage checks this file first; if the model is listed here, it uses your URL. If not, it falls back to the docs.fivem.net vehicle thumbnail (https://docs.fivem.net/vehicles/<model>.webp). If neither loads, it shows an empty tile. Edits to this file are picked up live — no resource restart needed. Just save the file and re-open the garage. Lines starting with _ are ignored by the matcher (the _README key above is documentation only).",
+
+    "_example_format": "Use the spawn name of the vehicle, not its display name. e.g. 'sultan' for the Karin Sultan, 'italigto' for the Grotti Itali GTO, or your addon car's spawn name (whatever you'd type in the /studio queue).",
+
+    "_url_tips": "Use a direct link to the image (e.g. https://i.imgur.com/abc123.png). Imgur, Discord CDN, GitHub raw files, your own web server — any URL that returns an image works. Recommended size: 256×128 or similar wide aspect ratio (the docs.fivem.net thumbnails are roughly that shape).",
+
+    "_comment_keys": "JSON doesn't support comments, so we use _README, _example_format, _url_tips, _comment_keys as documentation keys. They all start with _ so BGarage ignores them. Add your actual vehicles below this line.",
+
+    "sultan":    "https://docs.fivem.net/vehicles/sultan.webp",
+    "italigto":  "https://docs.fivem.net/vehicles/italigto.webp",
+
+    "_addon_examples_below": "Replace these with your own addon cars and image URLs:",
+    "na6":       "https://r2.fivemanage.com/yNppoqhy9bUW3LlH6QcTU/BGarage/na6.png",
+    "myaddon":   "https://example.com/thumbs/myaddon.png"
+}

@@ -1,0 +1,29 @@
+{
+    "05UBF603": {
+        "label": "Flash GT",
+        "mileage": 0.00550581082146,
+        "garage": 4
+    },
+    "03CRA003": {
+        "mileage": 0.05355712305122,
+        "favourite": false,
+        "garage": 1
+    },
+    "43OTO812": {
+        "garage": 19,
+        "mileage": 0.05441849703213
+    },
+    "28PUM057": {
+        "garage": 13,
+        "mileage": 0.34432524684171
+    },
+    "44JSU193": {
+        "garage": 1,
+        "mileage": 0.00668930249832
+    },
+    "01PMT053": {
+        "mileage": 0.0702018057276,
+        "favourite": false,
+        "garage": 20
+    }
+}

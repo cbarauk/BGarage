@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="prompt" class="prompt"><kbd>E</kbd><span></span></div>
+<div id="toast" class="toast"></div>
+
+<main id="panel" class="panel hidden" aria-label="Garage">
+  <header class="head">
+    <div class="title">
+      <svg class="ico" viewBox="0 0 24 24"><path d="M3 11l2-5h14l2 5M3 11v7h3v-2h12v2h3v-7M3 11h18M7 14h.01M17 14h.01"/></svg>
+      <h1 id="garageName"></h1>
+      <span id="garageTag" class="tag hidden">Private</span>
+    </div>
+    <div class="spaces" title="Vehicles parked here">
+      <span>Parked here</span><b id="spaceText">0</b>
+    </div>
+    <button class="icon" id="closeBtn" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </header>
+
+  <div class="toolbar">
+    <label class="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg>
+      <input id="search" type="text" placeholder="Search by name or plate" autocomplete="off">
+    </label>
+    <div class="seg">
+      <button id="viewList" class="on" aria-label="List view"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <button id="viewGrid" aria-label="Grid view"><svg viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg></button>
+    </div>
+    <button class="btn" id="manageBtn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/></svg>Manage</button>
+  </div>
+
+  <div class="filters">
+    <nav class="chips" id="filters"></nav>
+    <label class="sort">
+      <svg viewBox="0 0 24 24"><path d="M7 4v16M7 20l-3-3M7 20l3-3M17 20V4M17 4l-3 3M17 4l3 3"/></svg>
+      <select id="sort">
+        <option value="relevance">Relevance</option>
+        <option value="name">Name</option>
+        <option value="fuel">Lowest fuel</option>
+        <option value="engine">Lowest engine</option>
+      </select>
+    </label>
+  </div>
+
+  <section id="list" class="list"></section>
+
+  <footer class="foot"><span id="count">0 vehicle(s)</span></footer>
+
+  <!-- Manage locations -->
+  <div id="modal" class="modal">
+    <div class="dialog manage">
+      <div class="dialog-head">
+        <h2>Manage locations</h2>
+        <button class="icon" id="modalClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+
+      <div class="manage-body">
+        <aside class="manage-side">
+          <h3>Add a location</h3>
+          <p class="hint">After you press Draw, the menu closes and you mark the drop-off area in the world: aim at the ground and press <b>E</b> for each corner (at least 3), then <b>Enter</b> to finish. Last, stand in each spot where vehicles should appear, facing the way they should point, and press <b>E</b> for each (up to 8). Several bays stop people spawning on top of each other. Press <b>Enter</b> to finish. Use <b>Bays</b> on a location later to add or change bays without redrawing the area.</p>
+          <div class="fields">
+            <label class="field grow"><span>Name</span><input id="locName" type="text" maxlength="32" placeholder="Mirror Park"></label>
+          </div>
+          <label class="check"><input id="locPrivate" type="checkbox"><i></i>Private, only I can use it</label>
+          <button class="btn solid" id="locAdd">Draw drop-off area</button>
+        </aside>
+
+        <section class="manage-main">
+          <h3>Existing locations <em id="locCount"></em></h3>
+          <ul id="locList" class="locs tiles"></ul>
+          <div id="locDetail" class="loc-detail"></div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm bringing a vehicle here from another garage -->
+  <div id="transferModal" class="modal">
+    <div class="dialog confirm">
+      <div class="dialog-head">
+        <h2>Transfer vehicle</h2>
+        <button class="icon" id="transferClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="dialog-body">
+        <p class="hint" id="transferHint"></p>
+        <div class="confirm-actions">
+          <button class="btn sm" id="transferCancel">Cancel</button>
+          <button class="btn sm solid" id="transferConfirm">Confirm transfer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm paying to recover an "Out" vehicle here -->
+  <div id="recoverModal" class="modal">
+    <div class="dialog confirm">
+      <div class="dialog-head">
+        <h2>Recover vehicle</h2>
+        <button class="icon" id="recoverClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="dialog-body">
+        <p class="hint" id="recoverHint"></p>
+        <div class="confirm-actions">
+          <button class="btn sm" id="recoverCancel">Cancel</button>
+          <button class="btn sm solid" id="recoverConfirm">Confirm recovery</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>
